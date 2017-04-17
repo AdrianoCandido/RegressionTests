@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9FC1C36A-BC09-4B14-92E2-D8C24E05423A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UnitTestProject1</RootNamespace>
+    <AssemblyName>UnitTestProject1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MSTest.TestFramework.1.1.11\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MSTest.TestFramework.1.1.11\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\AccountType.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\AditionalDataType.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\AuthorizationRequest.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\AuthorizationResponse.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\BaseRequest.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\BaseResponse.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\CardDataEntryMode.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\CompletionRequest.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\CompletionResponse.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\DiagnosticRequest.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\DiagnosticResponse.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\InstallmentType.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\ReversalRequest.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\ReversalResponse.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\DataContracts\TransactionRules.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\IProvider.cs" />
+    <Compile Include="AppObjects\AuthorizationProvider\Provider.cs" />
+    <Compile Include="AppObjects\Communication\HttpRequester.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorAuthorisationRequest.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorAuthorisationResponse.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorCancellationAdvice.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorCancellationAdviceResponse.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorCancellationRequest.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorCancellationResponse.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorCompletionAdvice.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorCompletionAdviceResponse.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorDiagnosticRequest.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorDiagnosticResponse.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorRejection.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorTransactionStatusReportRequestV2.2.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorTransactionStatusReportResponseV2.2.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\AcceptorTransactionStatusReportResponseV2.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\GenericIdentification.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\Header.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\RequestFactory.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\ResponseBase.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\SecurityTrailer.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\SimpleAuthorizationRequest.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\SimpleAuthorizationResponse.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\AccountType.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\ActionTypeCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\AdditionalService.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\AlgorithmCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\AmountCodeType.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\AttendanceCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\AuthenticationMethodCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\ContentType.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\InitiatingPartyIssuer.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\InitiatingPartyType.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\InstalmentType.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\MessageFunctionCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\PoiCardDataReadingCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\RejectReasonCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\ReportDatasetType.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\ResponseCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\ServiceAttribute.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\TmsContactLevelCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\TransactionChannelCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\TransactionEnvironmentCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\TransactionStatusCode.cs" />
+    <Compile Include="AppObjects\DataContracts\PoiService\TypeCodes\UserInterfaceCode.cs" />
+    <Compile Include="AppObjects\SerializationValidation.cs" />
+    <Compile Include="AppObjects\Serialization\XSerializer.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Tests\Mastercard\Authorization\AuthorizeCreditPinOnline.cs" />
+    <Compile Include="Tests\Ticket\TicketPinOnline.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.targets')" />
+</Project>
