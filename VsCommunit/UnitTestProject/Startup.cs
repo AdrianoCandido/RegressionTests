@@ -24,7 +24,7 @@ namespace PoiServiceRegressionTests.AppObjects
         [AssemblyCleanup]
         public static void AssemblyCleanup()
         {
-            Thread.Sleep(TimeSpan.FromMinutes(2));
+           // Thread.Sleep(TimeSpan.FromMinutes(2));
         }
     }
 }

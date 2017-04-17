@@ -1,7 +1,10 @@
 ﻿using Buy4.Services.Sdk.Models.Poi;
+using Dlp.Buy4.AuthorizationProvider.Core.Operations;
+using Dlp.Buy4.AuthorizationProvider.ServiceLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PoiServiceRegressionTests.AppObjects.Communication;
 using PoiServiceRegressionTests.AppObjects.DataContracts.PoiService;
+using System;
 
 namespace PoiServiceRegressionTests.Tests.Mastercard.Authorization
 {
@@ -13,6 +16,8 @@ namespace PoiServiceRegressionTests.Tests.Mastercard.Authorization
         [TestInitialize]
         public void TestInitialize()
         {
+            Provider.InterceptAuthorize += ProvideInterceptAuthorize;
+
             request = new SimpleAuthorizationRequest()
             {
                 AccountType = AccountType.CreditCard,
@@ -52,6 +57,24 @@ namespace PoiServiceRegressionTests.Tests.Mastercard.Authorization
             request.TransactionCapture = false;
             var result = HttpRequester.Post(request);
             Assert.IsTrue(result.Content.CompletionRequired);
+        }
+
+        private AuthorizationResponse ProvideInterceptAuthorize(AuthorizationRequest arg)
+        {
+            return new AuthorizationResponse()
+            {
+                AcquirerDateTime = DateTime.UtcNow,
+                ActionCode = "0000",
+                AmountAuthorized = 1,
+                AmountOriginal = 1,
+                AquirerTransactionKey = "11111111111111",
+                AuthorizationId = "12322",
+                BalanceAmount = 1,
+                IccRelatedData = "111111",
+                IsPartial = false,
+                PaymentSchemeId = 1,
+                Success = true
+            };
         }
     }
 }
