@@ -1,24 +1,17 @@
 ﻿using Buy4.Services.Sdk.Models.Poi;
-using Dlp.Buy4.AuthorizationProvider.Core.Operations;
-using Dlp.Buy4.AuthorizationProvider.ServiceLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PoiServiceRegressionTests.AppObjects.Communication;
 using PoiServiceRegressionTests.AppObjects.DataContracts.PoiService;
-using System;
+using UnitTestProject1.Tests;
 
 namespace PoiServiceRegressionTests.Tests.Mastercard.Authorization
 {
     [TestClass]
-    public class AuthorizeCreditPinOnline
+    public class AuthorizeCreditPinOnline : BaseAuthorization
     {
-        private SimpleAuthorizationRequest request;
-
-        [TestInitialize]
-        public void TestInitialize()
+        public AuthorizeCreditPinOnline() : base()
         {
-            Provider.InterceptAuthorize += ProvideInterceptAuthorize;
-
-            request = new SimpleAuthorizationRequest()
+            Request = new SimpleAuthorizationRequest()
             {
                 AccountType = AccountType.CreditCard,
                 AmountInCents = 10,
@@ -46,35 +39,18 @@ namespace PoiServiceRegressionTests.Tests.Mastercard.Authorization
         [TestMethod]
         public void Authorize_TransactionCapture_true()
         {
-            request.TransactionCapture = true;
-            var result = HttpRequester.Post(request);
+            Request.TransactionCapture = true;
+            var result = HttpRequester.Post(Request);
+            Assert.AreEqual("0000", result.Content.ResponseReason);
             Assert.IsFalse(result.Content.CompletionRequired);
         }
 
         [TestMethod]
         public void Authorize_TransactionCapture_false()
         {
-            request.TransactionCapture = false;
-            var result = HttpRequester.Post(request);
+            Request.TransactionCapture = false;
+            var result = HttpRequester.Post(Request);
             Assert.IsTrue(result.Content.CompletionRequired);
-        }
-
-        private AuthorizationResponse ProvideInterceptAuthorize(AuthorizationRequest arg)
-        {
-            return new AuthorizationResponse()
-            {
-                AcquirerDateTime = DateTime.UtcNow,
-                ActionCode = "0000",
-                AmountAuthorized = 1,
-                AmountOriginal = 1,
-                AquirerTransactionKey = "11111111111111",
-                AuthorizationId = "12322",
-                BalanceAmount = 1,
-                IccRelatedData = "111111",
-                IsPartial = false,
-                PaymentSchemeId = 1,
-                Success = true
-            };
         }
     }
 }

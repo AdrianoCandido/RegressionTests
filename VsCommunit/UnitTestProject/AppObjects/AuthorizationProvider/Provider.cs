@@ -12,9 +12,9 @@ namespace Dlp.Buy4.AuthorizationProvider.ServiceLib
         InstanceContextMode = InstanceContextMode.PerCall)]
     public partial class Provider : IProvider
     {
-        static public event Func<AuthorizationRequest, AuthorizationResponse> InterceptAuthorize;
-        static public event Func<CompletionRequest, CompletionResponse> InterceptComplete;
-        static public event Func<ReversalRequest, ReversalResponse> InterceptReverse;
+        static public Func<AuthorizationRequest, AuthorizationResponse> InterceptAuthorize;
+        static public Func<CompletionRequest, CompletionResponse> InterceptComplete;
+        static public Func<ReversalRequest, ReversalResponse> InterceptReverse;
 
         public AuthorizationResponse Authorize(AuthorizationRequest request)
         {

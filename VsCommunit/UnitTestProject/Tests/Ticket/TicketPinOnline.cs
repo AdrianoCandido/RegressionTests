@@ -2,11 +2,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PoiServiceRegressionTests.AppObjects.Communication;
 using PoiServiceRegressionTests.AppObjects.DataContracts.PoiService;
+using UnitTestProject1.Tests;
 
 namespace PoiServiceRegressionTests.Tests.Mastercard.Authorization
 {
     [TestClass]
-    public class TicketPinOnline
+    public class TicketPinOnline : BaseAuthorization
     {
         private SimpleAuthorizationRequest request;
 

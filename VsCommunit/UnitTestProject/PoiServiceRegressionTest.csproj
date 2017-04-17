@@ -120,6 +120,7 @@
     <Compile Include="AppObjects\SerializationValidation.cs" />
     <Compile Include="AppObjects\Serialization\XSerializer.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Tests\BaseAuthorization.cs" />
     <Compile Include="Tests\Mastercard\Authorization\AuthorizeCreditPinOnline.cs" />
     <Compile Include="Tests\Ticket\TicketPinOnline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
