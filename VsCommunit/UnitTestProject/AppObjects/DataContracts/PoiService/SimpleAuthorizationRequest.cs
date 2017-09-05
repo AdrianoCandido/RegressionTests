@@ -1,9 +1,9 @@
 ﻿using Buy4.Services.Sdk.Models.Poi;
+using System;
 
 namespace PoiServiceRegressionTests.AppObjects.DataContracts.PoiService
 {
     public enum CardDataEntryMode { Magnetic, Ecommerce, Chip, ContactLess }
-
 
     /// <summary>
     /// Object to simplify authorization request parameters.
@@ -19,7 +19,7 @@ namespace PoiServiceRegressionTests.AppObjects.DataContracts.PoiService
         public CardDataEntryMode EntryMode { get; set; }
         public string ExpirationDate { get; set; }
         public bool FalbackIndicator { get; set; }
-        public string ICCRltdData { get; set; }
+        public string EmvData { get; set; }
         public string InitiatorTransactionkey { get; set; }
         public InstalmentType Installment { get; set; }
         public int InstalmentQuantity { get; set; }
@@ -32,6 +32,7 @@ namespace PoiServiceRegressionTests.AppObjects.DataContracts.PoiService
         public string Track2 { get; set; }
         public bool TransactionCapture { get; set; }
         public string ValidationCode { get; set; }
+        public string Mcc { get; set; }
 
         #endregion
     }

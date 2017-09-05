@@ -1,6 +1,7 @@
 ﻿using Buy4.Services.Sdk.Models.Poi;
 using System;
 using System.Collections.Generic;
+using UnitTestProject1.AppObjects.DataContracts;
 
 namespace PoiServiceRegressionTests.AppObjects.DataContracts.PoiService
 {
@@ -101,11 +102,12 @@ namespace PoiServiceRegressionTests.AppObjects.DataContracts.PoiService
             tx.TransactionIdentification.TransactionReference = request.InitiatorTransactionkey;
             tx.TransactionDetails = new AcceptorAuthorisationRequest.AcceptorAuthorisationRequestData.AuthorisationRequestData.TransactionData.TransactionDetailsData();
 
+            tx.MerchantCategoryCode = request.Mcc?.ToString();
             tx.TransactionDetails.AccountType = request.AccountType;
 
             tx.TransactionDetails.Currency = "986";
             tx.TransactionDetails.TotalAmount = request.AmountInCents.ToString();
-            tx.TransactionDetails.ICCRelatedData = request.ICCRltdData;
+            tx.TransactionDetails.ICCRelatedData = request.EmvData;
             tx.TransactionDetails.Installment = new AcceptorAuthorisationRequest.AcceptorAuthorisationRequestData.AuthorisationRequestData.Installment();
 
             tx.TransactionDetails.Installment.InstalmentType = request.Installment;
@@ -114,7 +116,7 @@ namespace PoiServiceRegressionTests.AppObjects.DataContracts.PoiService
             return acceptorRequest;
         }
 
-        public static SimpleAuthorizationResponse CreateResponse(AcceptorAuthorisationResponse response)
+        public static SimpleAuthorizationResponse CreateAuthorizationResponse(AcceptorAuthorisationResponse response)
         {
             if (response == null)
             {
@@ -134,6 +136,37 @@ namespace PoiServiceRegressionTests.AppObjects.DataContracts.PoiService
             sResponse.TransactionDateTime = response.Data.AuthorisationResponse.Transaction.TransactionIdentification.TransactionDateTime;
 
             return sResponse;
+        }
+
+        public static AcceptorCompletionAdvice CreateCompletionAdvice(SimpleCompletionAdvice request)
+        {
+            AcceptorCompletionAdvice r = new AcceptorCompletionAdvice();
+            r.Data = new AcceptorCompletionAdvice.AcceptorCompletionAdviceData();
+            r.Data.CompletionAdvice = new AcceptorCompletionAdvice.CompletionAdvice();
+            r.Data.CompletionAdvice.Environment = new AcceptorCompletionAdvice.Environment();
+            r.Data.CompletionAdvice.Environment.Merchant = new AcceptorCompletionAdvice.Merchant();
+            r.Data.CompletionAdvice.Transaction = new AcceptorCompletionAdvice.Transaction();
+            r.Data.CompletionAdvice.Transaction.OriginalTransaction = new AcceptorCompletionAdvice.OriginalTransaction();
+            r.Data.CompletionAdvice.Transaction.OriginalTransaction.InitiatorTransactionIdentification = request.InitiatorTransactionKey;
+            r.Data.CompletionAdvice.Transaction.OriginalTransaction.RecipientTransactionIdentification = request.AcquirerTransactionKey;
+            r.Data.CompletionAdvice.Transaction.TransactionIdentification = new AcceptorCompletionAdvice.TransactionIdentificationData();
+            r.Data.CompletionAdvice.Transaction.TransactionIdentification.TransactionDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss");
+            r.Data.CompletionAdvice.Transaction.TransactionIdentification.TransactionReference = request.InitiatorTransactionKey;
+            r.Data.CompletionAdvice.Transaction.TransactionDetails.Currency = "986";
+            r.Data.CompletionAdvice.Transaction.TransactionDetails.TotalAmount = request.Amount.ToString();
+            r.Data.Header = new Header();
+            r.Data.Header.MessageFunction = MessageFunctionCode.CompletionAdvice;
+            r.Data.Header.ProtocolVersion = "2.0";
+
+            return r;
+        }
+
+        public static SimpleCompletionAdviceResponse CreateCompletionResponse(AcceptorCompletionAdviceResponse response)
+        {
+            SimpleCompletionAdviceResponse simpleResponse = new SimpleCompletionAdviceResponse();
+            simpleResponse.Completed = response.Data.CompletionAdviceResponse.Transaction.Response == ResponseCode.Approved;
+
+            return simpleResponse;
         }
     }
 }
