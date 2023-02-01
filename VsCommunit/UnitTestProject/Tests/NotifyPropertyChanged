@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
+namespace Fixtures.Builders
+{
+    /// <summary>
+    /// Allows class properties to be observed
+    /// </summary>
+    public abstract class NotifyPropertyChanged : INotifyPropertyChanged
+    {
+        private Dictionary<string, dynamic> _properties = new Dictionary<string, dynamic>();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Gets the value of a property
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        protected dynamic Get([CallerMemberName] string name = null)
+        {
+            if (_properties.TryGetValue(name, out dynamic value))
+                return value;
+            return default;
+        }
+
+        /// <summary>
+        /// Sets the value of a property
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <param name="name"></param>
+        /// <remarks>Use this overload when implicitly naming the property</remarks>
+        protected void Set(dynamic value, [CallerMemberName] string name = null)
+        {
+            if (Equals(value, Get(name)))
+                return;
+            _properties[name] = value;
+            OnPropertyChanged(name);
+        }
+
+        /// <summary>
+        /// Raised on property changed.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
+        /// <summary>
+        /// Binding two properties
+        /// </summary>
+        /// <typeparam name="Tin">The object to get the value.</typeparam>
+        /// <typeparam name="Tout">The object to set the value</typeparam>
+        /// <param name="current">the name of current property.</param>
+        /// <param name="propertyName">The name of property to get.</param>
+        /// <param name="input">The input type.</param>
+        /// <param name="output">The output file.</param>
+        public static void Bind<Tin, Tout>(string current, string propertyName, Tin input, Tout output)
+            where Tin : NotifyPropertyChanged
+            where Tout : NotifyPropertyChanged
+        { 
+            if(current == propertyName)
+                output.Set(input.Get(propertyName), propertyName);
+        }
+
+        /// <summary>
+        /// Binding two properties
+        /// </summary>
+        /// <typeparam name="Tin">The object to get the value.</typeparam>
+        /// <typeparam name="Tout">The object to set the value</typeparam>
+        /// <param name="current">the name of current property.</param>
+        /// <param name="propertyNameGet">The name of property to get.</param>
+        /// /// <param name="propertyNameSet">The name of property to get.</param>
+        /// <param name="input">The input type.</param>
+        /// <param name="output">The output file.</param>
+        public static void Bind<Tin, Tout>(string current,string propertyNameGet, string propertyNameSet, Tin input, Tout output)
+            where Tin : NotifyPropertyChanged
+            where Tout : NotifyPropertyChanged
+        {
+            if (current == propertyNameGet)
+                output.Set(input.Get(propertyNameGet), propertyNameSet);
+        }
+    }
+}
